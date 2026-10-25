@@ -233,5 +233,5 @@ footer .fb{display:flex;align-items:center;gap:10px;margin-bottom:8px;color:var(
 .regular{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--bg);font-size:13px;color:var(--ink2)}
 .sponsorslot{margin-top:18px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--line2);font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
 .mfoot{padding:20px 26px;background:var(--bg);font-size:12px;color:var(--mut);text-align:center}
-@media (max-width:520px){.mbody{padding:4px 18px 22px}.mhead{padding:24px 18px 22px}.mfoot{padding:18px}.form .two{grid-template-columns:1fr}.stat b{font-size:22px}.stat{padding:12px}}
+@media (max-width:520px){span.aside{display:none}.sect h2{white-space:nowrap}.mbody{padding:4px 18px 22px}.mhead{padding:24px 18px 22px}.mfoot{padding:18px}.form .two{grid-template-columns:1fr}.stat b{font-size:22px}.stat{padding:12px}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
