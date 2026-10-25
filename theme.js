@@ -20,7 +20,7 @@
   function sync(){var t=root.getAttribute('data-theme'),m=modePref(),dark=root.getAttribute('data-mode')==='dark';
     var opts=document.querySelectorAll('.topt');for(var i=0;i<opts.length;i++){var k=opts[i].getAttribute('data-theme'),T=THEMES[k],dk=T.dark||dark;
       opts[i].setAttribute('aria-checked',String(k===t));var pv=opts[i].querySelector('.tprev');if(pv){pv.style.background=dk?T.bgDark:T.bg;var sw=pv.querySelectorAll('.sw'),cols=dk?T.swDark:T.sw;for(var j=0;j<sw.length;j++)sw[j].style.background=cols[j];}}
-    var seg=document.querySelectorAll('.seg button');for(var x=0;x<seg.length;x++)seg[x].setAttribute('aria-checked',String(seg[x].getAttribute('data-mode')===m));
+    var seg=document.querySelectorAll('.mseg button');for(var x=0;x<seg.length;x++)seg[x].setAttribute('aria-checked',String(seg[x].getAttribute('data-mode')===m));
     var h=document.getElementById('modeHint');if(h)h.textContent=THEMES[t].dark?'Midnight Gold is always dark.':(m==='auto'?'Auto follows your phone (now '+(phoneDark()?'dark':'light')+').':(m==='dark'?'Dark backgrounds for night use.':'Bright and clean for daytime.'));}
   function apply(animate){var t=theme(),m=modePref(),dark=isDark(t,m);
     if(animate){root.classList.add('theming');clearTimeout(apply._t);apply._t=setTimeout(function(){root.classList.remove('theming');},520);}
@@ -46,22 +46,45 @@
     var sc=document.createElement('div');sc.className='tsheet-scrim';sc.id='themeScrim';
     var sh=document.createElement('div');sh.className='tsheet';sh.id='themeSheet';sh.setAttribute('role','dialog');sh.setAttribute('aria-modal','true');sh.setAttribute('aria-labelledby','themeTitle');sh.hidden=true;
     var h='<div class="grab" aria-hidden="true"></div><button type="button" class="x" id="themeClose" aria-label="Close">'+X+'</button><h2 id="themeTitle">Settings</h2><p class="tsub">Saved on this device</p>';
-    h+='<p class="slabel">Appearance</p><div class="sgroup"><div class="srow"><span class="stitle"><b id="modeLabel">Dark mode</b><small id="modeHint"></small></span></div><div class="seg" role="radiogroup" aria-labelledby="modeLabel">';
+    h+='<p class="slabel">Appearance</p><div class="sgroup"><div class="srow"><span class="stitle"><b id="modeLabel">Dark mode</b><small id="modeHint"></small></span></div><div class="mseg" role="radiogroup" aria-labelledby="modeLabel">';
     MODES.forEach(function(m){h+='<button type="button" role="radio" data-mode="'+m[0]+'" aria-checked="false">'+ICO[m[0]]+'<span>'+m[1]+'</span></button>';});
     h+='</div></div><p class="slabel">Theme</p><ul class="tlist" role="radiogroup" aria-label="Color theme">';
     ORDER.forEach(function(k){var t=THEMES[k];
       h+='<li><button type="button" class="topt" role="radio" data-theme="'+k+'" aria-checked="false"><span class="tprev"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="bar" style="background:'+t.bar+'"></span></span><span class="tname"><b>'+t.name+'</b><small>'+t.desc+'</small></span><span class="tcheck">'+CHECK+'</span></button></li>';});
-    h+='</ul><p class="tfoot">Every theme has a light and a dark look. Auto switches with your phone.</p>';
+    h+='</ul><p class="slabel">Near me</p><div class="sgroup"><label class="srow" for="homeCounty"><span class="stitle"><b>Home county</b><small>Used for “Near me” when location is off. Stays on this device.</small></span></label><div class="hsel"><select id="homeCounty"><option value="">Not set</option>'+['Duval','St. Johns','Clay','Nassau','Baker','Flagler','Putnam'].map(function(c){return '<option'+(get('jve_home')===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></div></div><p class="tfoot">Every theme has a light and a dark look. Auto switches with your phone.</p>';
     sh.innerHTML=h;document.body.appendChild(sc);document.body.appendChild(sh);
     sync();
     var last=null;
-    function open(){last=document.activeElement;sh.hidden=false;void sh.offsetWidth;sh.classList.add('open');sc.classList.add('open');var c=sh.querySelector('.seg [aria-checked=true]')||sh.querySelector('.topt');if(c)c.focus({preventScroll:true});}
+    function open(){last=document.activeElement;sh.hidden=false;void sh.offsetWidth;sh.classList.add('open');sc.classList.add('open');var c=sh.querySelector('.mseg [aria-checked=true]')||sh.querySelector('.topt');if(c)c.focus({preventScroll:true});}
     function close(){sh.classList.remove('open');sc.classList.remove('open');setTimeout(function(){if(!sh.classList.contains('open'))sh.hidden=true;},380);if(last&&last.focus)last.focus({preventScroll:true});}
     b.addEventListener('click',open);sc.addEventListener('click',close);document.getElementById('themeClose').addEventListener('click',close);
     var tb=document.querySelectorAll('[data-open-settings]');for(var i=0;i<tb.length;i++)tb[i].addEventListener('click',open);
-    sh.addEventListener('click',function(e){var o=e.target.closest('.topt');if(o){window.JVE_THEMES.apply(o.getAttribute('data-theme'));return;}var s=e.target.closest('.seg button');if(s)window.JVE_THEMES.setMode(s.getAttribute('data-mode'));});
+    sh.addEventListener('click',function(e){var o=e.target.closest('.topt');if(o){window.JVE_THEMES.apply(o.getAttribute('data-theme'));return;}var s=e.target.closest('.mseg button');if(s)window.JVE_THEMES.setMode(s.getAttribute('data-mode'));});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&sh.classList.contains('open')){e.stopPropagation();close();}},true);
+    var hc=document.getElementById('homeCounty');if(hc)hc.addEventListener('change',function(){put('jve_home',hc.value);try{window.dispatchEvent(new Event('jve:home'));}catch(_){}});
     window.JVE_THEMES.open=open;window.JVE_THEMES.close=close;
+    extras();
   }
+  function standalone(){try{return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}catch(e){return false;}}
+  function extras(){
+    // iPhone "Add to Home Screen" hint, shown once (unlocked only)
+    var ios=/iphone|ipad|ipod/i.test(navigator.userAgent||'')||/[?&]a2hs=1/.test(location.search);
+    if(ios&&!standalone()&&!get('jve_a2hs')&&!root.classList.contains('locked')){
+      var c=document.createElement('div');c.className='a2hs';c.setAttribute('role','note');
+      c.innerHTML='<span class="a2i"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></span><span class="a2t"><b>Install the app</b><small>Tap Share, then “Add to Home Screen”. Opens full screen, works offline.</small></span><button type="button" class="a2x" aria-label="Dismiss">'+X+'</button>';
+      document.body.appendChild(c);setTimeout(function(){c.classList.add('show');},900);
+      c.querySelector('.a2x').addEventListener('click',function(){put('jve_a2hs','1');c.classList.remove('show');setTimeout(function(){c.remove();},400);});
+    }
+    // pull to refresh (home-screen app only; Safari has its own)
+    if(standalone()||/[?&]ptr=1/.test(location.search)){
+      var ind=document.createElement('div');ind.className='ptr';ind.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg>';document.body.appendChild(ind);
+      var y0=null,dy=0;
+      document.addEventListener('touchstart',function(e){if(window.scrollY<=0&&!document.querySelector('.sheet.open,.tsheet.open')){y0=e.touches[0].clientY;dy=0;}},{passive:true});
+      document.addEventListener('touchmove',function(e){if(y0===null)return;dy=Math.max(0,Math.min(130,(e.touches[0].clientY-y0)*0.55));ind.style.transform='translate(-50%,'+(dy-50)+'px) rotate('+(dy*2.6)+'deg)';ind.classList.toggle('ready',dy>72);ind.style.opacity=String(Math.min(1,dy/60));},{passive:true});
+      document.addEventListener('touchend',function(){if(y0===null)return;y0=null;if(dy>72){ind.classList.add('spin');setTimeout(function(){location.reload();},350);}else{ind.style.transform='';ind.style.opacity='0';}});
+    }
+  }
+  // offline: cache the app on this device (network first, so updates show right away)
+  if('serviceWorker' in navigator&&location.protocol==='https:'){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
 })();

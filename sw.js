@@ -1,0 +1,8 @@
+/* Jax Vendor Events service worker: offline copy of the app shell + listings. Network first, cache fallback. */
+var CACHE='jve-prem1';
+var SHELL=['./','index.html','newsletter.html','list.html','pricing.html','styles.css?v=prem1','theme.js?v=prem1','logic.js?v=prem1','app.js?v=prem1','signup.js?v=prem1','list.js?v=prem1','gate.js','data/events.js?v=prem1','data/events.json','manifest.webmanifest','fonts/fraunces.woff2','fonts/inter.woff2','icons/logo.svg','icons/apple-touch-icon.png','icons/icon-192.png'];
+self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE).then(function(c){return Promise.all(SHELL.map(function(u){return c.add(u).catch(function(){});}));}).then(function(){return self.skipWaiting();}));});
+self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('jve-')===0&&k!==CACHE;}).map(function(k){return caches.delete(k);}));}).then(function(){return self.clients.claim();}));});
+self.addEventListener('fetch',function(e){var r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;
+  e.respondWith(fetch(r).then(function(res){if(res&&res.ok){var cp=res.clone();caches.open(CACHE).then(function(c){c.put(r,cp);});}return res;}).catch(function(){
+    return caches.match(r,{ignoreSearch:false}).then(function(m){return m||caches.match(r,{ignoreSearch:true}).then(function(m2){return m2||(r.mode==='navigate'?caches.match('index.html'):undefined);});});}));});
