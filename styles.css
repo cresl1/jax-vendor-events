@@ -44,7 +44,7 @@ html.locked body>*:not(#gate):not(.sprite){display:none!important}html:not(.lock
 /* draft bar + header */
 .draftbar{background:var(--draftbg);color:var(--draftfg);font-size:12px;font-weight:600;letter-spacing:.02em;text-align:center;padding:7px 14px;padding-top:calc(7px + var(--sat))}
 .draftbar b{color:#fff}
-.top{position:sticky;top:0;z-index:30;background:rgba(var(--glass-rgb),.78);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:30;padding-top:var(--sat);background:rgba(var(--glass-rgb),.78);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
 .brand .mark{width:36px;height:36px;border-radius:11px;box-shadow:0 6px 14px -6px rgba(var(--sun-rgb),.6)}
@@ -351,3 +351,18 @@ html[data-mode=dark] .hsel select{background:var(--surf)}
 .sect .aside::after,.seg button::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 .tabbar.six a span,.tabbar.six .tset span{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:350px){.tabbar.six a span,.tabbar.six .tset span{font-size:9.5px;letter-spacing:-.01em}}
+
+/* weekly email: send status, signup forms (Oct 25) */
+.tag.ok{background:var(--seabg);color:var(--sea2);gap:5px;height:26px;padding:0 11px;letter-spacing:.02em;font-size:12px;text-transform:none}
+.tag.ok .ico{width:14px;height:14px;stroke-width:2.4}
+.sendcard{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;margin-top:16px;padding:14px 16px;border-radius:18px;background:var(--card);box-shadow:var(--sh1),0 0 0 1px var(--line) inset;max-width:640px}
+.sendcard .sc-st{display:grid;gap:6px;justify-items:start;min-width:0}.sendcard small{color:var(--mut);font-size:13px;line-height:1.35}
+.sendcard .sc-act{display:flex;flex-wrap:wrap;gap:8px}.sendcard .btn{min-height:44px;font-size:14.5px;padding:0 16px;white-space:nowrap}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.suf{flex-wrap:wrap}.suf .su-name{flex:1 1 100%}
+.fsu{margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;max-width:460px}.fsu b{color:var(--ink);font-size:14px}
+.fsuf{display:flex;gap:8px}.fsuf input{flex:1;min-width:0;height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line2);background:var(--card);color:var(--ink);font-size:16px}
+.fsuf input::placeholder{color:var(--mut)}.fsuf .btn{height:46px;min-height:44px;padding:0 16px;white-space:nowrap}
+.fmsg{margin-top:0;color:var(--sea2)}.msg.err{color:#ffb4a0}.fmsg.err{color:var(--hot)}
+.suf input:focus-visible,.fsuf input:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+@media (max-width:420px){.sendcard .sc-act{width:100%}.sendcard .sc-act .btn{flex:1}}
