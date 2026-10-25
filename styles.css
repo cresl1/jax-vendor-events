@@ -345,3 +345,9 @@ html[data-mode=dark] .hsel select{background:var(--surf)}
 .sh-foot{grid-template-columns:minmax(0,1fr) auto auto auto}
 .sh-foot .btn.ghost{width:50px;padding:0}
 .sh-foot #shApply{min-width:0;padding:0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Web build standard (Oct 25): 44px tap areas without changing the look; tab labels never clip on small phones */
+.sect .aside,.seg button{position:relative}
+.sect .aside::after,.seg button::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.tabbar.six a span,.tabbar.six .tset span{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:350px){.tabbar.six a span,.tabbar.six .tset span{font-size:9.5px;letter-spacing:-.01em}}
