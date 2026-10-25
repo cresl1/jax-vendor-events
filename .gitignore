@@ -1,0 +1,7 @@
+*.env
+.env*
+password*
+*.key
+node_modules/
+.DS_Store
+qa/

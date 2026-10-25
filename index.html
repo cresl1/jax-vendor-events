@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="locked">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#14212b">
+<title>Jax Vendor Events — every vendor market in Northeast Florida</title>
+<meta name="description" content="Every vendor market in Northeast Florida, in one place, updated weekly. Private draft.">
+<link rel="stylesheet" href="styles.css">
+<script src="gate.js"></script>
+<script src="data/events.js" defer></script><script src="app.js" defer></script><script src="signup.js" defer></script>
+</head>
+<body>
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gbox">
+    <span class="logo" style="justify-content:center"><i aria-hidden="true"></i>Jax Vendor Events</span>
+    <h1 id="gateTitle">Private draft</h1>
+    <p>Enter the password to preview.</p>
+    <form id="gateForm"><label for="gatePw" class="sr" style="position:absolute;left:-9999px">Password</label><input id="gatePw" type="password" autocomplete="current-password" placeholder="Password" required><button class="btn" type="submit">Open</button><div id="gateErr" class="gerr" role="alert"></div></form>
+  </div>
+</div>
+<div class="draftbar">Draft preview — not public. Nothing here has been shared.</div>
+<header class="top"><div class="wrap"><a class="logo" href="index.html"><i aria-hidden="true"></i>Jax Vendor Events</a><nav aria-label="Main"><a href="index.html" aria-current="page">Events</a><a href="newsletter.html">Newsletter</a><a href="list.html">List your event</a><a href="pricing.html">Sponsor</a></nav></div></header>
+<main class="page wrap" id="main">
+<section class="hero">
+  <h1>Every vendor market in Northeast Florida, in one place.</h1>
+  <p>Updated weekly. Dates, fees and how to apply, straight from the organizers.</p>
+  <div class="stats"><span><b id="stTotal">209</b> upcoming events</span><span><b>7</b> counties</span><span><b id="stDl">0</b> deadlines in the next 2 weeks</span></div>
+</section>
+<section class="filters" aria-label="Filter events">
+  <div class="frow">
+    <div><label for="fMonth">Month</label><select id="fMonth"><option value="">All months</option></select></div>
+    <div><label for="fCounty">County</label><select id="fCounty"><option value="">All counties</option><option>Duval</option><option>St. Johns</option><option>Clay</option><option>Nassau</option><option>Baker</option><option>Flagler</option><option>Putnam</option></select></div>
+    <div><label for="fFee">Vendor fee</label><select id="fFee"><option value="">Any fee</option><option value="free">Free</option><option value="under50">Under $50</option><option value="50plus">$50+</option><option value="unknown">Fee not listed</option></select></div>
+    <div class="search"><label for="fQ">Search</label><input id="fQ" type="search" placeholder="Market, city, venue…"></div>
+  </div>
+</section>
+<p class="count" id="count" aria-live="polite"></p>
+<div class="month">Featured</div>
+<a class="card feat" href="pricing.html"><div><span class="ft">Featured listing</span><h3>Featured listing — your event here</h3><p>Organizers: put your market at the top of the list and in the weekly email. See options →</p></div></a>
+<div id="list"></div>
+<section class="signup" aria-labelledby="su">
+  <h2 id="su">Get the weekly email</h2>
+  <p>New markets, deadlines coming up and free-to-vend spots. One short email, every week.</p>
+  <form id="signupForm" novalidate><label for="suEmail" style="position:absolute;left:-9999px">Email</label><input id="suEmail" type="email" placeholder="you@email.com" autocomplete="email"><button class="btn" type="submit">Sign me up</button></form>
+  <div id="suMsg" class="msg" role="status"></div>
+</section>
+<p class="note">Listings tagged “unverified” come from public posts and haven't been re-checked yet. Weekly markets show dates projected from the organizer's published schedule. Spot a mistake? Use “List your event” to send a correction.</p>
+
+</main>
+<footer><div class="wrap">Jax Vendor Events · Northeast Florida: Duval, St. Johns, Clay, Nassau, Baker, Flagler, Putnam · Listings link to each organizer's own page; always confirm details with the organizer.</div></footer>
+</body>
+</html>

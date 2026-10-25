@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" class="locked">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#14212b">
+<title>List your event — Jax Vendor Events</title>
+<meta name="description" content="Every vendor market in Northeast Florida, in one place, updated weekly. Private draft.">
+<link rel="stylesheet" href="styles.css">
+<script src="gate.js"></script>
+<script src="list.js" defer></script>
+</head>
+<body>
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gbox">
+    <span class="logo" style="justify-content:center"><i aria-hidden="true"></i>Jax Vendor Events</span>
+    <h1 id="gateTitle">Private draft</h1>
+    <p>Enter the password to preview.</p>
+    <form id="gateForm"><label for="gatePw" class="sr" style="position:absolute;left:-9999px">Password</label><input id="gatePw" type="password" autocomplete="current-password" placeholder="Password" required><button class="btn" type="submit">Open</button><div id="gateErr" class="gerr" role="alert"></div></form>
+  </div>
+</div>
+<div class="draftbar">Draft preview — not public. Nothing here has been shared.</div>
+<header class="top"><div class="wrap"><a class="logo" href="index.html"><i aria-hidden="true"></i>Jax Vendor Events</a><nav aria-label="Main"><a href="index.html">Events</a><a href="newsletter.html">Newsletter</a><a href="list.html" aria-current="page">List your event</a><a href="pricing.html">Sponsor</a></nav></div></header>
+<main class="page wrap" id="main">
+<h1>List your event</h1>
+<p class="lead">Running a market, festival or pop-up in Northeast Florida? Basic listings are free.</p>
+<div class="panel">
+<form class="form" id="listForm" novalidate>
+  <div><label for="lName">Event name</label><input id="lName" required></div>
+  <div class="two"><div><label for="lDate">Date</label><input id="lDate" type="date"></div><div><label for="lRepeat">Repeats?</label><select id="lRepeat"><option>One time</option><option>Weekly</option><option>Monthly</option><option>Other</option></select></div></div>
+  <div class="two"><div><label for="lCity">City</label><input id="lCity"></div><div><label for="lCounty">County</label><select id="lCounty"><option>Duval</option><option>St. Johns</option><option>Clay</option><option>Nassau</option><option>Baker</option><option>Flagler</option><option>Putnam</option></select></div></div>
+  <div><label for="lVenue">Venue (public location)</label><input id="lVenue"></div>
+  <div class="two"><div><label for="lFee">Vendor fee</label><input id="lFee" placeholder="e.g. $35 or Free"></div><div><label for="lDl">Application deadline</label><input id="lDl" type="date"></div></div>
+  <div><label for="lLink">Application link or contact</label><input id="lLink" placeholder="https://… or email"></div>
+  <div><label for="lNotes">Anything vendors should know</label><textarea id="lNotes" rows="3"></textarea></div>
+  <label style="font-weight:400;display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="lFeat" style="width:auto;margin-top:4px"> I'm interested in a Featured listing</label>
+  <button class="btn" type="submit">Submit event</button>
+  <div id="listMsg" class="note" role="status"></div>
+</form>
+</div>
+<p class="note">Draft: this form doesn't send anything yet. Every listing is checked against the organizer's own page before it goes up.</p>
+
+</main>
+<footer><div class="wrap">Jax Vendor Events · Northeast Florida: Duval, St. Johns, Clay, Nassau, Baker, Flagler, Putnam · Listings link to each organizer's own page; always confirm details with the organizer.</div></footer>
+</body>
+</html>

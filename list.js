@@ -1,0 +1,1 @@
+(function(){'use strict';var f=document.getElementById('listForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('listMsg').textContent='Draft only \u2014 submissions aren\u2019t switched on yet, so nothing was sent.';});})();
