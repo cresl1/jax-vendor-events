@@ -11,7 +11,7 @@
       e.preventDefault();
       var v=document.getElementById('gatePw').value.trim();
       if(await sha(v)===H){try{localStorage.setItem(K,H);}catch(_e){} unlock();}
-      else{document.getElementById('gateErr').textContent='That password didn\'t match.';}
+      else{document.getElementById('gateErr').textContent='That password didn\'t match.';var b=document.getElementById('gbox');if(b){b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');}}
     });
   });
 })();
