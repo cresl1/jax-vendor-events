@@ -366,3 +366,40 @@ html[data-mode=dark] .hsel select{background:var(--surf)}
 .fmsg{margin-top:0;color:var(--sea2)}.msg.err{color:#ffb4a0}.fmsg.err{color:var(--hot)}
 .suf input:focus-visible,.fsuf input:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
 @media (max-width:420px){.sendcard .sc-act{width:100%}.sendcard .sc-act .btn{flex:1}}
+
+/* city & county signup (Oct 25) */
+.b.city{background:var(--sunbg);color:var(--ink)}
+.cw.city .card{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.cw.city .heart{bottom:52px}
+.howto{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;margin-top:-1px;border-radius:0 0 var(--r) var(--r);background:var(--ink);color:var(--inv);font-weight:700;font-size:14px;text-decoration:none;box-shadow:var(--sh1)}
+.howto:hover{filter:brightness(1.08)}.howto:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.howto .ico{width:16px;height:16px}
+.hidn{color:var(--mut);font-weight:500}
+.citycta{display:flex;align-items:center;gap:14px;margin:22px 0 4px;padding:16px 18px;min-height:44px;border-radius:var(--r);background:var(--card);color:var(--ink);text-decoration:none;box-shadow:var(--sh1),0 0 0 1px var(--line2) inset;transition:transform .2s var(--ease)}
+.citycta:hover{transform:translateY(-1px)}.citycta:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.cc-ico{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--seabg);color:var(--sea2)}
+.cc-t{min-width:0;flex:1}.cc-t b{display:block;font:700 16.5px/1.25 var(--disp)}.cc-t span{display:block;font-size:13px;color:var(--mut);margin-top:3px}
+.cc-go{flex:none;color:var(--sea)}
+footer .flink{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:6px;color:var(--ink);font-weight:650;text-decoration:none}footer .flink:hover{text-decoration:underline}
+.ag-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
+.ag-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;background:var(--card);color:var(--ink);font-weight:600;font-size:13.5px;text-decoration:none;box-shadow:0 0 0 1px var(--line2) inset}
+.ag-nav a:hover{background:var(--bg2)}
+.basics{margin-top:18px}.basics .sect h2{display:block;font-size:19px;line-height:1.25}.basics .sect h2 .ico{vertical-align:-3px;margin-right:6px}
+.basics ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.basics li{display:grid;grid-template-columns:24px 1fr;gap:8px;font-size:14.5px}.basics li .ico{color:var(--sea);margin-top:2px}
+.basics li small{display:block;color:var(--mut);font-size:12.5px}
+.agencies{display:grid;gap:16px;margin-top:8px}@media (min-width:900px){.agencies{grid-template-columns:1fr 1fr;align-items:start}}
+.agency{scroll-margin-top:90px;padding:20px;border-radius:24px;background:var(--card);box-shadow:var(--sh1),0 0 0 1px var(--line) inset;min-width:0}
+.agency h3{font:700 19px/1.2 var(--disp);margin:0 0 4px}
+.agency .ag-sub{font-size:12.5px;color:var(--mut);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.agency .btn{width:100%;height:auto;min-height:48px;margin:12px 0 4px;white-space:normal;text-align:center;line-height:1.25;padding:10px 14px}
+.agency ol{margin:10px 0 0;padding-left:22px;display:grid;gap:7px;font-size:14.5px}
+.agency .kv{grid-template-columns:24px 1fr;padding:10px 0}
+.agency .kv dd{margin:0;overflow-wrap:anywhere;font-size:14px}
+.agency .kv a,.basics a,.agency .ag-ev a{color:var(--sea2);font-weight:600;overflow-wrap:anywhere}
+.agency .src{font-size:12px;color:var(--mut);margin-top:10px;overflow-wrap:anywhere}
+.agency .src a{color:var(--mut)}
+.ag-ev{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.ag-ev li{padding:10px 12px;border-radius:14px;background:var(--bg2);font-size:14px}
+.ag-ev li b{display:block}
+.ag-ev li span{color:var(--mut);font-size:12.5px}
