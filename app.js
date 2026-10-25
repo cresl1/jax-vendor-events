@@ -147,8 +147,9 @@
       row('ext','Source',src)+
       row('check','Last checked',e.last_checked?fmt(e.last_checked)+', '+e.last_checked.slice(0,4):'Not yet re-checked')+
       (e.verified?'<p class="sh-note ok">'+ico('shield')+'<span>Verified against the organizer\'s own page. Still confirm details before you pay.</span></p>':'<p class="sh-note">'+ico('info')+'<span>Unverified: from a public post or web scan, not re-checked yet. Confirm with the organizer before you pay.</span></p>');
-    var ap=$('shApply');if(apply){ap.href=apply;ap.hidden=false;}else if(safeUrl(e.source)){ap.href=e.source;ap.hidden=false;ap.firstChild.textContent='View source ';}else{ap.hidden=true;}
-    if(apply) ap.firstChild.textContent='Apply / vendor info ';
+    var ap=$('shApply'),ext=ap.querySelector('svg'),dest=apply||safeUrl(e.source);ap.classList.toggle('off',!dest);ext.style.display=dest?'':'none';
+    if(dest){ap.href=dest;ap.removeAttribute('aria-disabled');ap.removeAttribute('tabindex');ap.firstChild.textContent=apply?'Apply / vendor info ':'View source ';}
+    else{ap.removeAttribute('href');ap.setAttribute('aria-disabled','true');ap.setAttribute('tabindex','-1');ap.firstChild.textContent=e.contact?'Contact organizer (see above)':'Apply link not on file yet';}
     $('shIcs').disabled=!curA;
     sheet.setAttribute('aria-hidden','false');sheet.classList.add('open');scrim.classList.add('open');document.body.style.overflow='hidden';
     $('shBody').scrollTop=0;setTimeout(function(){$('shClose').focus({preventScroll:true});},60);
@@ -163,7 +164,7 @@
   });
   scrim.addEventListener('click',closeSheet);$('shClose').addEventListener('click',closeSheet);
   document.addEventListener('keydown',function(k){if(k.key==='Escape') closeSheet();
-    if(k.key==='Tab'&&sheet.classList.contains('open')){var f=sheet.querySelectorAll('a[href]:not([hidden]),button:not([disabled])');if(!f.length)return;var a=f[0],z=f[f.length-1];if(k.shiftKey&&document.activeElement===a){z.focus();k.preventDefault();}else if(!k.shiftKey&&document.activeElement===z){a.focus();k.preventDefault();}}});
+    if(k.key==='Tab'&&sheet.classList.contains('open')){var f=sheet.querySelectorAll('a[href],button:not([disabled])');if(!f.length)return;var a=f[0],z=f[f.length-1];if(k.shiftKey&&document.activeElement===a){z.focus();k.preventDefault();}else if(!k.shiftKey&&document.activeElement===z){a.focus();k.preventDefault();}}});
   // swipe down to close (mobile)
   var y0=null,dy=0;sheet.addEventListener('touchstart',function(t){if(t.target.closest('.sh-body')&&$('shBody').scrollTop>0)return;y0=t.touches[0].clientY;dy=0;},{passive:true});
   sheet.addEventListener('touchmove',function(t){if(y0===null)return;dy=Math.max(0,t.touches[0].clientY-y0);if(dy>0){sheet.style.transition='none';sheet.style.transform='translateY('+dy+'px)';}},{passive:true});
